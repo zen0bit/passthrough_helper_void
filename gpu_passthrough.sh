@@ -2,9 +2,7 @@
 
 echo "Installing required packages"
 
-vpm i qemu nano virt-manager
-
-dnf groupinstall "Virtualization"
+vpm i nano qemu libvirt virt-manager
 
 echo "Edit grub: intel_iommu=on or amd_iommu=on rd.driver.pre=vfio-pci kvm.ignore_msrs=1"
 
