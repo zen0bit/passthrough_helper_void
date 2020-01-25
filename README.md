@@ -1,4 +1,4 @@
-# passthrough_helper_fedora
+# passthrough_helper_void
 GPU passthrough helper
 
 For instructions go to https://www.youtube.com/watch?v=Cssen5-QCk0&t=263s
