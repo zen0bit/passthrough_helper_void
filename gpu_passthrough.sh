@@ -2,17 +2,17 @@
 
 echo "Installing required packages"
 
-dnf install qemu qemu-img nano -y
+vpm i qemu nano virt-manager
 
-dnf groupinstall "Virtualization" -y
+dnf groupinstall "Virtualization"
 
 echo "Edit grub: intel_iommu=on or amd_iommu=on rd.driver.pre=vfio-pci kvm.ignore_msrs=1"
 
-nano /etc/sysconfig/grub
+nano /etc/default/grub
 
 echo "Updating grub"
 
-grub2-mkconfig -o /etc/grub2-efi.cfg
+update-grub
 
 echo "Getting GPU passthrough scripts ready"
 
