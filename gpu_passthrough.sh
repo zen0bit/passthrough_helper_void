@@ -2,7 +2,15 @@
 
 echo "Installing required packages"
 
-vpm i nano qemu libvirt virt-manager
+xbps-install -S git
+
+git clone git@github.com:netzverweigerer/vpm.git
+
+mkdir -p ~/bin
+
+ln -s "$PWD/vpm" ~/bin/vpm
+
+vpm i nano qemu libvirt virt-manager vsv 
 
 echo "Activating libvirt services"
 
