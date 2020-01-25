@@ -10,7 +10,7 @@ nano /etc/default/grub
 
 echo "Updating grub"
 
-update-grub
+grub-mkconfig -o /boot/grub/grub.cfg
 
 echo "Getting GPU passthrough scripts ready"
 
@@ -24,4 +24,4 @@ cp local.conf /etc/dracut.conf.d/local.conf
 
 echo "Generating initramfs"
 
-dracut -f --kver `uname -r`
+dracut -f --kver $(uname -r)
