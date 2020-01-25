@@ -4,6 +4,14 @@ echo "Installing required packages"
 
 vpm i nano qemu libvirt virt-manager
 
+echo "Activating libvirt services"
+
+ln -s /etc/sv/libvirtd /var/service
+ln -s /etc/sv/virtlockd /var/service
+ln -s /etc/sv/virtlogd /var/service
+
+gpasswd -a "$USER" libvirt
+
 echo "Edit grub: intel_iommu=on or amd_iommu=on rd.driver.pre=vfio-pci kvm.ignore_msrs=1"
 
 nano /etc/default/grub
