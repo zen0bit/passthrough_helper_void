@@ -14,11 +14,11 @@ update-grub
 
 echo "Getting GPU passthrough scripts ready"
 
-cp vfio-pci-override-vga.sh /sbin/vfio-pci-override-vga.sh
+cp vfio-pci-override-vga.sh /usr/bin/vfio-pci-override-vga.sh
 
-chmod 755 /sbin/vfio-pci-override-vga.sh
+chmod 755 /usr/bin/vfio-pci-override-vga.sh
 
-echo "install vfio-pci /sbin/vfio-pci-override-vga.sh" > /etc/modprobe.d/local.conf
+echo "install vfio-pci /usr/bin/vfio-pci-override-vga.sh" > /etc/modprobe.d/local.conf
 
 cp local.conf /etc/dracut.conf.d/local.conf
 
