@@ -14,6 +14,7 @@ vpm i nano qemu libvirt virt-manager vsv
 
 echo "Activating libvirt services"
 
+gpasswd -a "$USER" libvirt
 ln -s /etc/sv/libvirtd /var/service
 ln -s /etc/sv/virtlockd /var/service
 ln -s /etc/sv/virtlogd /var/service
