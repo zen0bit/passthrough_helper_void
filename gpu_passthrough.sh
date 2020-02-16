@@ -2,13 +2,13 @@
 
 echo "Installing required packages"
 
-xbps-install -S git
+#xbps-install -S git
 
-git clone git@github.com:netzverweigerer/vpm.git
+#git clone git@github.com:netzverweigerer/vpm.git
 
-mkdir -p ~/bin
+#mkdir -p ~/bin
 
-ln -s "$PWD/vpm" ~/bin/vpm
+#ln -s "$PWD/vpm" ~/bin/vpm
 
 vpm i nano qemu libvirt virt-manager vsv 
 
