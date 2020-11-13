@@ -1,42 +1,39 @@
 #!/bin/bash
 
-echo "Installing required packages"
+echo -e "\e[32mInstalling required packages\e[0m"
+xbps-install -S qemu libvirt virt-manager 
 
-#xbps-install -S git
-
-#git clone git@github.com:netzverweigerer/vpm.git
-
-#mkdir -p ~/bin
-
-#ln -s "$PWD/vpm" ~/bin/vpm
-
-vpm i nano qemu libvirt virt-manager vsv 
-
-echo "Activating libvirt services"
-
+echo -e "\e[32mActivating libvirt services\e[0m"
 gpasswd -a "$USER" libvirt
 ln -s /etc/sv/libvirtd /var/service
 ln -s /etc/sv/virtlockd /var/service
 ln -s /etc/sv/virtlogd /var/service
 
-echo "Edit grub: intel_iommu=on or amd_iommu=on rd.driver.pre=vfio-pci kvm.ignore_msrs=1"
+echo "#GRUB_CMDLINE_LINUX_DEFAULT= CHOOSE intel_iommu=on OR amd_iommu=on AND ADD rd.driver.pre=vfio-pci kvm.ignore_msrs=1" >> /etc/default/grub
+EDITOR=$EDITOR
+if [ -e /bin/nano ]
+then
+	EDITOR=nano
+elif  [ -e /bin/micro ]
+then
+	EDITOR=micro
+else
+	EDITOR=vim
+fi
+echo -e "\e[32mUsing $EDITOR editor.\e[0m"
+$EDITOR /etc/default/grub
 
-nano /etc/default/grub
-
-echo "Updating grub"
-
+echo -e "\e[32mUpdating grub\e[0m"
 grub-mkconfig -o /boot/grub/grub.cfg
 
-echo "Getting GPU passthrough scripts ready"
-
+echo -e "\e[32mGetting GPU passthrough scripts ready\e[0m"
 cp vfio-pci-override-vga.sh /usr/bin/vfio-pci-override-vga.sh
-
 chmod 755 /usr/bin/vfio-pci-override-vga.sh
 
 echo "install vfio-pci /usr/bin/vfio-pci-override-vga.sh" > /etc/modprobe.d/local.conf
-
 cp local.conf /etc/dracut.conf.d/local.conf
 
-echo "Generating initramfs"
-
+echo -e "\e[32mGenerating initramfs\e[0m"
 dracut -f --kver $(uname -r)
+
+echo -e "\e[32mScript finished.\e[0m"
