@@ -1,8 +1,11 @@
 # passthrough_helper_void
-GPU passthrough helper
+This is a simple script that makes your system ready to run a KVM/QEMU virtual machine with its own GPU.
+
+2 GPUs are needed. One of the GPUs can be an iGPU.
 
 sudo su
-chmod +x and run gpu_passthrough.sh
+chmod +x gpu_passthrough.sh
+./gpu_passthrough.sh
 
 after script exit su
  
