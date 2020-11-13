@@ -8,7 +8,8 @@ This is a simple script that makes your system ready to run a KVM/QEMU virtual m
 # chmod +x gpu_passthrough.sh
 # ./gpu_passthrough.sh
 
-after script exit su
+after script
+# exit
  
 For instructions go to https://www.youtube.com/watch?v=Cssen5-QCk0&t=263s
 
