@@ -1,4 +1,18 @@
 #!/bin/bash
+
+#Making sure this script runs with elevated privileges
+if [ $EUID -ne 0 ]
+	then
+		echo "Please run this as root!" 
+		exit 1
+fi
+
+if [ -a /sbin/vfio-pci-override-vga.sh ]
+	then 
+	echo "Please uninstall Passthrough Helper first! Then run passthrough.sh again."
+	exit
+fi
+
 echo -e "\e[32m Installing VGA passthrough\e[0m"
 
 echo -e "\e[32mInstalling required packages\e[0m"
@@ -42,8 +56,8 @@ grub-mkconfig -o /boot/grub/grub.cfg
 echo -e "\e[32m Getting GPU passthrough scripts ready"
 cp vfio-pci-override-vga.sh /usr/bin/vfio-pci-override-vga.sh
 chmod 755 /usr/bin/vfio-pci-override-vga.sh
-echo "install vfio-pci /usr/bin/vfio-pci-override-vga.sh" > /etc/modprobe.d/local.conf
 
+echo "install vfio-pci /usr/bin/vfio-pci-override-vga.sh" > /etc/modprobe.d/local.conf
 if virt=AMD-V
 	then
 	cp amd.conf /etc/dracut.conf.d/local.conf
